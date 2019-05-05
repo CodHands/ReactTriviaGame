@@ -15,24 +15,8 @@ h1 {
   color: #fff;
 }
 
-
-.questionCount {
-  font-size: 20px;
-  color: #afafaf;
-}
-
-.question {
-  font-size: 30px;
-  width: 900px;
-  max-width: 900px;
-  margin: 25px auto;
-  color: #fff;
-  word-break: break-all;
-}
-
-.answerOptions {
-  width: 900px;
-  margin: 0 auto;
+h2 {
+  color: #05d7ff;
 }
 
 .toast-success {
@@ -57,13 +41,57 @@ button {
   cursor: pointer;
 }
 
-h2 {
-  color: #05d7ff;
-}
-
 .loader {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%,-50%);
+}
+
+@media (max-width: 991px) and (min-width: 600px){
+  .question {
+    font-size: 24px;
+    width: 550px;
+  }
+
+   h1 {
+     font-size: 30px;
+     width: 550px;
+   }
+
+   .answerOptions {
+     width: 550px;
+   }
+}
+
+@media (max-width: 599px) and (min-width: 424px){
+  .question {
+    font-size: 18px;
+    width: 400px;
+  }
+
+   h1 {
+     font-size: 24px;
+     width: 300px;
+   }
+
+   .answerOptions {
+     width: 400px;
+   }
+}
+
+@media (max-width: 423px){
+  .question {
+    font-size: 14px;
+    width: 325px;
+  }
+
+   h1 {
+     font-size: 18px;
+     width: 200px;
+   }
+
+   .answerOptions {
+     width: 275px;
+   }
 }

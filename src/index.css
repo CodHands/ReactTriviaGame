@@ -35,18 +35,27 @@ body {
   margin: 0;
   padding: 0;
   list-style: none;
+  width: 900px;
+  margin: 0 auto;
 }
 
 /* QuestionCount Component */
 .questionCount {
   /* padding: 1.5rem 2.5rem 0; */
-  font-size: 14px;
+  font-size: 20px;
+  color: #afafaf;
 }
 
 /* Question Component */
 .question {
   margin: 0;
   padding: 0.5rem 2.5rem 1.5rem 2.5rem;
+  font-size: 30px;
+  width: 900px;
+  max-width: 900px;
+  margin: 25px auto;
+  color: #fff;
+  word-break: break-all;
 }
 
 /* AnswerOption Component */

@@ -1,11 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+
+//components
 import Question from '../components/question';
 import QuestionCount from '../components/questionCount';
 import AnswerOption from '../components/answerOptions';
 
 const Quiz = (props) => {
 
+    //AnswerOption Component
     function renderAnswerOptions(key,index) {
         return (
             <AnswerOption
@@ -21,10 +24,14 @@ const Quiz = (props) => {
 
     return (
         <div className="quiz">
+
+            {/* QuestionCount Component*/}
             <QuestionCount
                 counter={props.questionId}
                 total={props.questionTotal}
             />
+
+            {/* Question Component*/}
             <Question content={props.question} />
             <ul className="answerOptions">
                 {props.answerOptions.map(renderAnswerOptions)}

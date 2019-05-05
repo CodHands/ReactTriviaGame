@@ -26,6 +26,7 @@ class App extends Component{
     this.fetchQuestions();
   }
 
+  //fetching question list through API
   async fetchQuestions(){
     try {
         let questionList = await fetch(`https://opentdb.com/api.php?amount=10&category=9&difficulty=easy&type=multiple`)
@@ -43,29 +44,35 @@ class App extends Component{
     }
   }
 
+  //handle the selected answers
   handleAnswerSelected = (event)  => {
-    let str1 = this.state.correct_answer;
-    let str2 = event.currentTarget.value;
+    var answerOption = document.getElementById(event.currentTarget.value).nextSibling;
 
-    if(str1.localeCompare(str2) === 0){  
+    if(this.state.correct_answer.localeCompare(event.currentTarget.value) === 0){  
+      answerOption.style.backgroundColor = '#1af59d';
       this.setState({ isSuccess: true, result: this.state.result + 1})          
     } else {
+      answerOption.style.backgroundColor = '#a70303d1';
       this.setState({isFailure: true})
     }
 
-    if (this.state.questionId < this.state.questionList.length) {
-        setTimeout(() => this.setNextQuestion(), 1500);
-    } else {
-      setTimeout(() => 
-        this.setState({
-          isSuccess: false,
-          isFailure: false,
-          isFinished: true
-      }),1500)
-    }
-
+    this.checkForNextQuestion(answerOption)
   }
 
+  checkForNextQuestion(answerOption){
+    if (this.state.questionId < this.state.questionList.length) {
+        setTimeout(() => {
+          answerOption.style.backgroundColor = 'transparent';
+          this.setNextQuestion()
+        }, 1500);
+    } else {
+      setTimeout(() => 
+        this.setState({isSuccess: false,isFailure: false,isFinished: true})
+      ,1500)
+    }
+  }
+
+  //setting up next question
   setNextQuestion() {
     const counter = this.state.counter + 1;
     const questionId = this.state.questionId + 1;
@@ -98,7 +105,7 @@ class App extends Component{
   }
 
   render(){
-    const {answer,answerOptions,questionId,question,questionList,correct_answer} = this.state;
+    const {answerOptions,questionId,question,questionList,correct_answer} = this.state;
     
     return (
       <div className="App">
@@ -107,15 +114,15 @@ class App extends Component{
             <h1>Bank Of Hodlers Quiz</h1>
             { 
               !this.state.isFinished ? 
-              <Quiz
-                answer={answer}
-                answerOptions={answerOptions}
-                questionId={questionId}
-                question={question}
-                questionTotal={questionList.length}
-                onAnswerSelected={this.handleAnswerSelected}
-                correct_answer={correct_answer}
-            /> : (
+
+                <Quiz
+                    answerOptions={answerOptions}
+                    questionId={questionId}
+                    question={question}
+                    questionTotal={questionList.length}
+                    onAnswerSelected={this.handleAnswerSelected}
+                    correct_answer={correct_answer}
+                /> : (
                 <div>
                   <h2>{this.state.result > 5 ? `Hurray. You scored ${this.state.result} out of ${this.state.questionList.length}.` : `Oops. You scored ${this.state.result} out of ${this.state.questionList.length}.Better Luck next time.` }</h2>
                   <button onClick={this.resetQuiz}>Start Again</button>
@@ -123,14 +130,15 @@ class App extends Component{
               )
             }
           
-          <Utilities 
-              isSuccess={this.state.isSuccess}
-              isFailure={this.state.isFailure}
-          />
+            {/*Utilities Component*/}
+            <Utilities 
+                isSuccess={this.state.isSuccess}
+                isFailure={this.state.isFailure}
+            />
           </div>
-        ) : <div className="loader">
+        ) : (<div className="loader">
               <img src="https://loading.io/spinners/ellipsis/lg.discuss-ellipsis-preloader.gif" alt="loader" width="125"/>
-            </div>
+            </div>)
         }
       </div>
     );
