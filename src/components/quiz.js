@@ -6,14 +6,14 @@ import AnswerOption from '../components/answerOptions';
 
 const Quiz = (props) => {
 
-    function renderAnswerOptions(key) {
+    function renderAnswerOptions(key,index) {
         return (
             <AnswerOption
-                key={key}
+                key={index}
                 answerContent={key}
                 answerType={key}
-                answer={props.answer}
                 questionId={props.questionId}
+                correct_answer={props.correct_answer}
                 onAnswerSelected={props.onAnswerSelected}
             />
         );
@@ -21,22 +21,20 @@ const Quiz = (props) => {
 
     return (
         <div className="quiz">
-        <QuestionCount
-            counter={props.questionId}
-            total={props.questionTotal}
-        />
-        <Question content={props.question} />
-        <ul className="answerOptions">
-            {props.answerOptions.map(renderAnswerOptions)}
-        </ul>
+            <QuestionCount
+                counter={props.questionId}
+                total={props.questionTotal}
+            />
+            <Question content={props.question} />
+            <ul className="answerOptions">
+                {props.answerOptions.map(renderAnswerOptions)}
+            </ul>
         </div>
     );
 }
 
 Quiz.propTypes = {
-    answer: PropTypes.string.isRequired,
     answerOptions: PropTypes.array.isRequired,
-    counter: PropTypes.number.isRequired,
     question: PropTypes.string.isRequired,
     questionId: PropTypes.number.isRequired,
     questionTotal: PropTypes.number.isRequired,

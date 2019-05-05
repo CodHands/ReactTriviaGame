@@ -11,10 +11,11 @@ const AnswerOption = (props) => {
         checked={props.answerType === props.answer}
         id={props.answerType}
         value={props.answerType}
-        disabled={props.answer}
         onChange={props.onAnswerSelected}
       />
-      <label className="radioCustomLabel" htmlFor={props.answerType}>
+      <label 
+        className="radioCustomLabel" 
+        htmlFor={props.answerType}>
         {props.answerContent}
       </label>
     </li>
@@ -24,7 +25,6 @@ const AnswerOption = (props) => {
 AnswerOption.propTypes = {
   answerType: PropTypes.string.isRequired,
   answerContent: PropTypes.string.isRequired,
-  answer: PropTypes.string.isRequired,
   onAnswerSelected: PropTypes.func.isRequired
 };
 
