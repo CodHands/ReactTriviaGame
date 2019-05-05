@@ -76,6 +76,7 @@ class App extends Component{
     this.setQuestionStates(counter,questionId)
   }
 
+  //resetting the quiz to initial state
   resetQuiz = () => {
     const counter = 0;
     const questionId = 1;
